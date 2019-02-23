@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> <title>Pure React Samples</title> </head>
+<style>
+  body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;    
+    font-weight: 400;
+  }
+  p {
+    margin: 2px;
+  }
+
+  div>div>div>p {
+    margin-left: 10px;
+  }
+</style>
+<body>
+    <h1>Paul React Page</h1>
+  <!-- Target container -->  
+<div class="react-container"></div>
+  <!-- React library & ReactDOM-->
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script> 
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script>
+     // Pure React and JavaScript code
+     let key = 1;
+     const container = document.getElementsByClassName('react-container')[0];
+     const h2 = React.createElement('h2', {key: key++}, 'Paul was here');
+     const p = React.createElement('p', {key: key++}, 'A nice paragraph');
+     const q = React.createElement('p', {key: key++}, 'Another classy paragraph');
+     const r = React.createElement('p', {key: key++}, 'A paragraph to impress the girls');
+
+    // more nested stuff
+    const d = React.createElement('div', {key: key++}, 
+      React.createElement('p', {key: key++}, 'A nested paragraph'),
+      React.createElement('p', {key: key++}, 'Another nested paragraph')
+    );
+
+     let a = [h2, p, q, d, r];
+     const div = React.createElement('div', {key: key++}, a);
+     ReactDOM.render(div, container);
+
+    //  setInterval(() => {
+    //   const p = React.createElement('p', {key: key++}, Date());
+    //   a.push(p);
+    //   ReactDOM.render(div, container);
+    //  }, 2000);
+</script>
+</body>
+</html>
