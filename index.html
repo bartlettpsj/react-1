@@ -12,16 +12,32 @@
   }
 
   div>div>div>p {
-    margin-left: 10px;
+    margin-left: 40px;
+    font-size: 0.90em;
+    color: blueviolet;
   }
 </style>
 <body>
-    <h1>Paul React Page</h1>
+  <h1>Paul React Page</h1>
   <!-- Target container -->  
-<div class="react-container"></div>
+  <div class="react-container"></div>
+  <hr/>
+  <div id="container-2">
+    <h2>Another Container</h2>
+  </div>
+  <hr/>
+  <div id="container-3">
+    <h2>A third Container</h2>
+  </div>
+  <hr/>
+  <div id="container-4">
+    <h2>A fourth Container</h2>
+  </div>
+
   <!-- React library & ReactDOM-->
 <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script> 
 <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+
 <script>
      // Pure React and JavaScript code
      let key = 1;
@@ -31,13 +47,17 @@
      const q = React.createElement('p', {key: key++}, 'Another classy paragraph');
      const r = React.createElement('p', {key: key++}, 'A paragraph to impress the girls');
 
+      // Use array
+    const names = ['Paul', 'fauzia', 'javed', 'farah', 'kelsy', 'charles'];
+     const li = React.createElement('ol', {key: key++}, names.map(name => React.createElement('li', {key: key++}, name)));
+
     // more nested stuff
     const d = React.createElement('div', {key: key++}, 
       React.createElement('p', {key: key++}, 'A nested paragraph'),
       React.createElement('p', {key: key++}, 'Another nested paragraph')
     );
 
-     let a = [h2, p, q, d, r];
+     let a = [h2, p, q, d, r, li];
      const div = React.createElement('div', {key: key++}, a);
      ReactDOM.render(div, container);
 
@@ -46,6 +66,47 @@
     //   a.push(p);
     //   ReactDOM.render(div, container);
     //  }, 2000);
+
+    // Using React.createClass
+    const familyComponent = React.createClass({
+      displayName: 'My Family',
+      render() {
+        return React.createElement('ul', { 'className': 'myFamily' }, 
+          this.props.list.map( (name) => React.createElement('li', {key: key++},  name))
+        )
+      }
+    });
+
+    const family = React.createElement(familyComponent, { list: names }, null);
+    const container2 = document.getElementById('container-2');
+    ReactDOM.render(family, container2);
+
+    // Using class
+    class Folk extends React.Component {
+      renderNames(name) {
+        return React.createElement('li', {key: key++},  name);
+      }
+      render() {
+        return React.createElement('ul', { 'className': 'myFamily' }, 
+          this.props.list.map(this.renderNames)
+        )
+      }
+    }
+
+    const people = ['mohammed', 'abu bakr', 'umar', 'uthman', 'ali'];
+    const folk = React.createElement(Folk, { list: people }, null);
+    const container3 = document.getElementById('container-3');
+    ReactDOM.render(folk, container3);
+
+    const colors = ["red", "green", "blue", "yellow", "brown"];
+    const ColorList = ({colors}) => React.createElement('ul', { "className": 'colors' }, 
+      colors.map( (color) => React.createElement('li', { key: key++}, color))
+    );
+    const container4 = document.getElementById('container-4');
+    const colorList = React.createElement(ColorList, { colors }, null)
+    ReactDOM.render(colorList, container4);
+      
+
 </script>
 </body>
 </html>
