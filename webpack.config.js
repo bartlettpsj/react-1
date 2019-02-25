@@ -7,7 +7,8 @@ module.exports = {
    entry: "./src/index.js",
    output: {
        path: path.resolve(__dirname, "dist"),
-       filename: "bundle.js"
+       filename: "bundle.js",
+       sourceMapFilename: 'bundle.map'
    },
    plugins: [
     new HtmlWebpackPlugin({
@@ -16,6 +17,12 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin()    
    ],  
+   devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    hot: true,
+    disableHostCheck: true        
+   },      
+   devtool: 'source-map', //'#source-map',   
    module: {
        rules: [
            {
