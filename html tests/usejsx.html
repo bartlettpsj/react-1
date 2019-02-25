@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Pure React Samples</title>
+</head>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        font-weight: 400;
+        margin: 20px;
+    }
+
+    p {
+        margin: 2px;
+    }
+
+    section>p {
+        margin-left: 40px;
+        font-size: 0.90em;
+        color: blueviolet;
+    }
+
+    .capitalize {
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+</style>
+
+<body>
+    <h1>Welcome to Pauls JSX Test</h1>
+    <div id="react-container"></div>
+
+    <!-- React library & ReactDOM-->
+    <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.js"></script>
+
+    <!-- Can do JSX code here -->
+    <script type="text/babel">
+        const people = [ 
+            { name: 'mohammed', detail: { yob: '570', yod: '632', order: 1}, wives: ['khadija', 'sawda', 'aisha', 'hafsa', 'zaynab', 'umm salama', 'zaynab', 'juwayriya', 'umm habiba', 'safiyya', 'maymuna'] }, 
+            { name: 'abu bakr', detail: { yob: '573', yod: '634', order: 2} }, 
+            { name: 'umar ibn al-khattab', detail: { yob: '584', yod: '644', order: 3} }, 
+            { name:'uthman', detail: { yob: '579', yod: '656', order: 4} }, 
+            { name: 'ali ibn abi talib', detail: { yob: '601', yod: '661', order: 5} }
+        ];
+        console.log(people.reduce( (a,v) => a ? a + "." + v : v, ''));
+
+        const People = ({title, items}) =>  (
+            <div>
+                <header>
+                    <h2>{title}</h2>
+                    {items.map(person => 
+                        <div>
+                            <Person name={person.name}/>
+                            <Details detail={person.detail}/>
+                            <Wives wives={person.wives}/>
+                        </div>)}
+                </header>
+            </div>
+        );
+
+        const Person =  ({name}) => (
+            <div>
+                <h3 className="capitalize">{name}</h3>
+            </div>
+        );
+
+        const Details = ({detail}) => (
+            <div>
+                Order:{detail.order}<br/> 
+                Born: {detail.yob}<br/>
+                Died: {detail.yod}
+            </div>
+        );
+
+        const Wives = ({wives}) => {  
+            if (wives) {
+                return (           
+                    <section>
+                        <h3>Wives</h3>
+                        {wives.map(wife => <p>{wife}</p>)}                                        
+                    </section>
+                )
+            } else 
+            return null;
+        };
+
+        ReactDOM.render(<People title='Islamic People' items={people}/>, document.getElementById('react-container'));
+    </script>
+    
+
+
+</body>
+
+</html>

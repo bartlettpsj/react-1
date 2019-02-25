@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <script>
+            function loadStuff() {
+                const mydiv = document.getElementById('mydiv');
+                const myScript = document.getElementById('this-content1');                
+                const text = myScript.innerText;
+                const t = document.createElement('template');
+                t.innerHTML = text.trim();
+                mydiv.appendChild(t.content.firstChild);
+                const other = document.getElementById('other');
+                mydiv.appendChild(other);
+
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Hello from Paul</h1>
+        <div id="mydiv">Useful div</div>
+        <hr/>
+        <button onclick="loadStuff();"">Click</button>
+        <div id="other">Other Stuff</div>
+        <script type="text/html" id="this-content1">
+            <div>
+                <h1>This Header Info One</h1>
+                <p>This content one. . .</p>
+            </div>
+            </script>
+            <script type="text/html" id="this-content2">
+            <h1>This Header Info Two</h1>
+            <p>This content two. . .</p>
+            </script>
+    </body>
+</html>
